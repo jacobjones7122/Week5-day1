@@ -1,19 +1,16 @@
 <div id="inputSection">
-<p class="inputBox">Text: </p>
-<input type="text" id="message" ng-model="newChirp.message">
-<br />
-<br />
-<button class="btnInput" id="btnText" ng-click="UpdateChirp()">Update!</button>
-<br />
-<br />
-<button class="btnInput" id="btnText" ng-click="DeleteChirp()">Delete!</button>
-<br />
-<br />    
-<a class="btnInputUser" href="/">Return to Homepage</a>
-<br />
-<br />
-<a class = "btnInputUser" id="btnSelect" href="#!/list">Full List</a>
+    <p class="inputBox">Text: </p>
+    <input type="text" id="message" ng-model="newMessage">
+    <br />
+    <br />
+    <button class="btnInput" id="btnText" ng-click="UpdateChirp()">Update!</button>
+    <br />
+    <br />
+    <button class="btnInput" id="btnText" ng-click="DeleteChirp()">Delete!</button>
+    <br />
+    <br />
+    <btn id="btnFull" ng-click="Return()">Back to Full List</btn>
 </div>
 <div id="chirperDiv">
-        <div ng-repeat="chirp in chirps" class="chirp" id="{{ chirp.id }}">{{ chirp.user }} - {{ chirp.timestamp }} - {{ chirp.message }} <!-- <button ng-click="">UPDATE</button><button ng-click="">DELETE</button> --> </div>
+    <div class="chirp" id="{{ chirp.id }}">{{ chirp.user }} @ {{ chirp.timestamp }} <br /> {{ chirp.message }}</div>
 </div>

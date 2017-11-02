@@ -1,103 +1,79 @@
 var app = angular.module('myApp.controllers', []);
 
-app.controller('SingleChirpController', ['$scope', '$http', '$location', '$routeParams', function ($scope, $http, $location, $routeParams){
+app.controller('SingleChirpController', ['$scope', 'Chirper', 'Chirps', 'UpdateChirper', '$location', '$routeParams', function ($scope, Chirper, Chirps, UpdateChirper, $location, $routeParams){
     var chirpId = $routeParams.id;
-    console.log(chirpId);
+    getOne();
 
-    getSingleTweet();
-
-    function getSingleTweet(){
-        $http({
-            url: ('/api/users/' + chirpId),
-            method: 'GET'
-        }).then(function(response){
-            console.log("response " + response.data[0]);
-            $scope.chirps = response.data[0];
-        }, console.log('error'));
-    }
-
-    $scope.UpdateChirp = function updateTweet(){
-        updatechirp = {
-            id: chirpId,
-            message: $('#message').val()
-        }    
-        $http({
-            url: ('/api/chirps/update'),
-            method: 'POST',
-            data: updatechirp
-        }).then(function(response){
-            getSingleTweet();
-        }, console.log('error'));
-    };
-
-    $scope.DeleteChirp = function deleteTweet(){
-        deleteChirp = {id: chirpId};
-        console.log(deleteChirp);
-        $http({
-            url: ('/api/users/' + chirpId),
-            method: 'DELETE',
-        }).then(function(response){
-            console.log(response.data)
+    function getOne(){
+        $scope.chirp = Chirps.get({id: chirpId}, function(success){
+            console.log('working');
+        }, function(err){
+            console.log('error');
+        });
+    };   
+    
+    $scope.DeleteChirp = function(){
+        $scope.chirp.$delete(function(){
             $location.path('/list');
-        }, console.log('error'));
+        }, function(err) {
+            console.log("error");
+        })
     };
 
+    $scope.UpdateChirp = function(){
+        var c = new UpdateChirper({
+            id: chirpId,            
+            message: $scope.newMessage
+        });
+        c.$save(function(success){
+            $('.class').empty();
+            getOne();
+        }, function(error){
+            $scope.newMessage = '';
+        });
+    };
+
+    $scope.Return = function(){
+        $location.path('/list');
+    }
 }]);
 
-
-app.controller('ChirpsController', ['$scope', '$http', function($scope, $http){
-
-    getTweets();
-    getUsers();
-
-    function getTweets(){
-        console.log('getTweets start')
-        $http({
-            url: '/api/chirps',
-            method: 'GET'
-        }).then(function(response) {
-            $scope.chirps = response.data[0];    
-        }, console.log('error'));
-    };
+app.controller('ChirpsController', ['$scope', '$location', 'Chirper', 'Chirps', function($scope, $location, Chirper, Chirps){
+    $scope.chirps = Chirper.query();
+    $scope.username = Chirps.query();
 
     $scope.postChirps = function(){
-        var chirps = {
-            userId: $('#userOption').val(),
-            message: $('#message').val(),
-         };
-         $http({
-            url: '/api/chirps',
-            method: 'POST',
-            data: chirps
-        }).then(function(response) {
-             getTweets();
-        }, console.log('error'));
+        var c = new Chirper({
+            userId: $('#userOption').val(),            
+            message: $scope.newMessage
+        });
+        c.$save(function(success){
+            console.log('success')
+        }, function(error){
+            $('.class').empty();
+            $scope.chirps = Chirper.query();
+            $scope.newMessage = '';
+        });
     };
 
-    function getUsers(){
-        $('#userOptions').empty();
-        $http({
-            url: '/api/users',
-            method: 'GET',
-        }).then(function(response){
-            $scope.username = response.data[0];
-        }, console.log('error'));
+    $scope.MakeUser = function(){
+        $location.path('/');
     };
+}]);
 
+app.controller('WelcomeController', ['$scope', '$location', 'Chirps', function($scope, $location, Chirps){
     $scope.createUsers = function(){
-        var user = {userName: $('#username').val()};
-        $http({
-            url: '/api/users',
-            method: 'POST',
-            data: user
-        }).then(function(response){
-            getUsers();
-        }, console.log('error'))
-    };
-
-    $scope.singleChirp = function(){
-
+        var u = new Chirps({
+            userName: $scope.newUsername
+        })
+        u.$save(function(success){
+            $scope.newUsername = '';
+        }, function(error){
+            console.log('error');
+        });
     }
 
-
+    $scope.ListLink = function() {
+        $location.path('/list');
+    };
 }]);

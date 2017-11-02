@@ -1,9 +1,10 @@
 // all routing here
-var app = angular.module('myApp', ['ngRoute', 'myApp.controllers']);
+var app = angular.module('myApp', ['ngRoute', 'ngResource', 'myApp.controllers', 'myApp.factories']);
 app.config(["$routeProvider", function ($routeProvider) {
     $routeProvider
     .when('/', {
-        templateUrl: 'views/welcome.html'
+        templateUrl: 'views/welcome.html',
+        controller: 'WelcomeController'
     })
     .when('/list', {
         templateUrl: 'views/list.html',
@@ -12,10 +13,6 @@ app.config(["$routeProvider", function ($routeProvider) {
     .when('/single_view/:id', {
         templateUrl: 'views/single_view.html',
         controller: 'SingleChirpController'
-    })
-    .when('/single_update/: id', {
-        templateUrl: 'views/single_update.html',
-        controller: 'UpdateChirpController'
     })
     .otherwise({
         redirectTo: '/'

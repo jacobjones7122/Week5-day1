@@ -99,8 +99,7 @@ function getOneChirp(id) {
                 connection.query("CALL getSingleChirp(?)", [id], (err, resultsets) => {
                     connection.release();
                     if (err) {reject(err);} 
-                    else {fulfill(resultsets);
-                    console.log(resultsets);};
+                    else {fulfill(resultsets[0]);};
                 }) 
             }
         });
@@ -132,7 +131,7 @@ app.route('/')
 app.route('/api/chirps')
     .get((req, res) => {
         getChirps().then(function(chirps){
-            res.send(chirps);
+            res.send(chirps[0]);
         }, function(err) {
             res.status(500).send(err);
         })
@@ -160,8 +159,10 @@ app.route('/api/chirps/:id')
 app.route('/api/users/:id')
     .get((req, res) => {
         let userId = req.params.id;
+        console.log(userId);
         getOneChirp(userId).then(function(id){
-            res.status(201).send(id);
+            console.log(id[0]);
+            res.status(201).send(id[0]);
         }, function(err) {
             res.status(500).send(err);
         })
@@ -190,7 +191,7 @@ app.route('/api/chirps/update')
 app.route("/api/users")
     .get((req, res) => {
         getUsers().then(function(users){
-            res.send(users);
+            res.send(users[0]);
         }, function(err) {
             res.status(500).send(err);
         })

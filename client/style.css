@@ -3,15 +3,39 @@
     font-size: 100px;
     text-align: center;
     margin-left: 37%; 
-    padding: 10px;
     width: 100px;
     height: 100px;
 }
+
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
 
 .chirp{
     width: 100%;
     height: 100px;
 
+}
+
+#btnSelect{
+    margin-left: 27px;
+}
+
+#or{
+    margin-left: 58px;
+}
+
+#btnFull{
+    margin-left: 24px;
+    border-radius: 10%;
+    border: 4px solid rgb(255, 255, 255);
+    background-color: rgb(192, 192, 255);
+    width: 52px;
+    padding-right: 1px;
+    padding-left: 1px;
 }
 
 #chirperDiv{
@@ -34,20 +58,31 @@
 #inputSection{
     margin: auto;
     width: 200px;
-    height: 230px;
+    height: 190px;
     padding: 10px;
     align-content: center
 }
 
-html{   
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(to bottom right, rgb(21, 171, 226), rgb(2, 120, 156)); 
+.header3{
+    color: rgb(255, 255, 255);
+}
+
+#homepage{
+    margin-left: 30px;
+    border-radius: 10%;
+    border: 4px solid rgb(255, 255, 255);
+    background-color: rgb(192, 192, 255);
+    width: 165px;
+    font-size: 20px;
 }
 
 .inputBox{
     color: rgb(233, 233, 233);
     margin: auto;
+}
+
+.editLink{
+    float: right;
 }
 
 .btnInput{
@@ -83,4 +118,12 @@ html{
     border: 3px solid rgb(255, 255, 255);
     background-color: rgb(192, 192, 255);
     color: rgb(255, 255, 255);
+}
+
+#canvas{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom right, rgb(21, 171, 226), rgb(2, 120, 156)); 
+    z-index: -1;
+    position: absolute;
 }

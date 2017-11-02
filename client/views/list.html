@@ -1,31 +1,17 @@
-<!-- <div class="container">
-    <h2>Chirper List</h2>
-    <br />
-    <div id="chirperDiv">
-        <div ng-repeat="chirp in chirps">
-            {{ chirp.user }} - {{"@" + chirp.timestamp }} - {{ chirp.message }}
-        </div>
-    </div>
-</div> -->
-
 <div id="inputSection">
-    <p class="inputBox">Create Username: </p><input type="text" name="user" id="username">
-    <br /> 
     <p class="inputBox">Choose Username: </p>
         <select id="userOption">
-        <option ng-repeat="users in username" value="{{users.id}}">{{ users.user }}</option>
+        <option class="options" ng-repeat="users in username" value="{{users.id}}">{{ users.user }}</option>
         </select>
     <br />
-    <p class="inputBox">Text: </p><input type="text" id="message" ng-model="newChirp.message">
+    <p class="inputBox">Text: </p><input type="text" id="message" ng-model="newMessage">
     <br />
     <br />
     <button class="btnInput" id="btnText" ng-click="postChirps()">Chirp!</button> 
     <br />
     <br />
-    <!-- <a class = "btnInputUser" id="btnSelect" href='/'>Back to Homepage!</a> -->
-    <!-- <a class = "btnInputUser" id="btnSelect" href='#!/single_view/: id'>Search Chirps by User!</a> -->
-    <button class="btnInput" id="btnCreateUser" ng-click="createUsers()">Create Users!</button>
+    <btn id="homepage" ng-click="MakeUser()">Create User</btn>
 </div>
 <div id="chirperDiv">
-    <div ng-repeat="chirp in chirps" class="chirp" id="{{ chirp.id }}">{{ chirp.user }} - {{ chirp.timestamp }} - {{ chirp.message }} <a class="editLink" href='#!/single_view/{{chirp.id}}'>Edit</a> </div>
+    <div ng-repeat="chirp in chirps" class="chirp" id="{{ chirp.id }}">{{ chirp.user }} @ {{ chirp.timestamp }} <br /> {{ chirp.message }} <a class="editLink" href='#!/single_view/{{chirp.id}}'>Edit</a> </div>
 </div>

@@ -1,6 +1,11 @@
     <div id="inputSection">
-        <p>Welcome to Chirper! Click the following buttons to upload your Chirps or to find your friends Chirps.</p>
+        <h3 class="header3">Welcome to Chirper! Feel free to create a new username or if you already have a username then click on the Get Started!</h3>
+        <br />
+        <p class="inputBox">Create Username: </p><input type="text" name="user" id="username" ng-model="newUsername">
         <br />
         <br />
-        <a class = "btnInput" id="btnSelect" href='#!/list'>Get Started!</a>
+        <button class="btnInput" id="btnCreateUser" ng-click="createUsers()">Create Users!</button>
+        <br />
+        <h3 class="header3" id='or'>- Or -</h3>
+        <btn class = "btnInput" id="btnSelect" href='#!/list' ng-click="ListLink()">Get Started!</btn>
     </div>
